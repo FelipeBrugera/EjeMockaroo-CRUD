@@ -134,7 +134,7 @@ class AccesoDatos {
         $stmt_moduser->bindValue(':id'          ,$cli->id);
 
         $stmt_moduser->execute();
-        $resu = ($stmt_moduser->rowCount () == 1);
+        $resu = ( ($stmt_moduser->rowCount () == 1) || ($stmt_moduser->rowCount () == 0) );
         return $resu;
     }
 

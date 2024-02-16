@@ -1,6 +1,6 @@
 
 <hr>
-<form   method="POST">
+<form  enctype="multipart/form-data" method="POST">
 <table>
  <tr><td>id:</td> 
  <td><input type="number" name="id" value="<?=$cli->id ?>"  readonly  ></td>

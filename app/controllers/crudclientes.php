@@ -36,23 +36,13 @@ function crudDetalles($id){
         $banderaUrl = "https://flagpedia.net/data/flags/w702/aq.webp";
     }
 
-    if($cli->id >= 1 && $cli->id <= 10)
-    {
-        if($cli->id < 10)
-        {
-            $imagenCli = "app/uploads/0000000" . $cli->id . ".jpg";
-        }
-        else
-        {
-            $imagenCli = "app/uploads/000000" . $cli->id . ".jpg";
-        }
-    }
-    else
-    {
-        $imagenCli = generarImagenAleatoria($cli->id);
-    }
+   
+        $imagenCli = imagenPerfil($cli->id);;
+    
+
     include_once "app/views/detalles.php";
 }
+
 
 function crudDetallesSiguiente($id){
 
@@ -226,6 +216,11 @@ function crudPostModificar(){
               $_SESSION['msg'] = "Correo electrónico no válido o ya registrado.";
               return; // No continúes con la modificación si el correo no es válido
           }
+      }
+
+      if (!chequeoImagen($_POST,$_FILES)) {
+        $_SESSION['msg'] = "Fallo Imagen";
+        return;
       }
 
     // Validar dirección IP
