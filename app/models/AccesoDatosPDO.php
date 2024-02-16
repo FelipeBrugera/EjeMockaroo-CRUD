@@ -218,6 +218,20 @@ class AccesoDatos {
         // Si no se encontró exactamente una fila, devolvemos un false
         return $rol;
     }
+
+    public function siguienteId() : int {
+        //Forma de obtener el siguiente número del AutoIncrement
+        $stmt_nexId = $this->dbh->prepare("SELECT AUTO_INCREMENT 
+        FROM INFORMATION_SCHEMA.TABLES 
+        WHERE TABLE_SCHEMA = :database 
+        AND TABLE_NAME = 'Clientes'");
+        
+        $stmt_nexId->bindValue(':database',DATABASE);
+        $stmt_nexId->execute();
+
+        $resu = $stmt_nexId->fetch();
+        return $resu[0];
+    }
     
     
      // Evito que se pueda clonar el objeto. (SINGLETON)

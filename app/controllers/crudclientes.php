@@ -37,7 +37,7 @@ function crudDetalles($id){
     }
 
    
-        $imagenCli = imagenPerfil($cli->id);;
+        $imagenCli = imagenPerfil($cli->id);
     
 
     include_once "app/views/detalles.php";
@@ -58,21 +58,7 @@ function crudDetallesSiguiente($id){
         }
         
         //Obtener la imagen del cliente
-        if($cli->id >= 1 && $cli->id <= 10)
-        {
-            if($cli->id < 10)
-            {
-                $imagenCli = "app/uploads/0000000" . $cli->id . ".jpg";
-            }
-            else
-            {
-                $imagenCli = "app/uploads/000000" . $cli->id . ".jpg";
-            }
-        }
-        else
-        {
-            $imagenCli = generarImagenAleatoria($cli->id);
-        }
+        $imagenCli = imagenPerfil($cli->id);
 
         include_once "app/views/detalles.php";
     } 
@@ -94,21 +80,7 @@ function crudDetallesAnterior($id){
         }
         
         //Obtener la imagen
-        if($cli->id >= 1 && $cli->id <= 10)
-        {
-            if($cli->id < 10)
-            {
-                $imagenCli = "app/uploads/0000000" . $cli->id . ".jpg";
-            }
-            else
-            {
-                $imagenCli = "app/uploads/000000" . $cli->id . ".jpg";
-            }
-        }
-        else
-        {
-            $imagenCli = generarImagenAleatoria($cli->id);
-        }
+        $imagenCli = imagenPerfil($cli->id);
 
         include_once "app/views/detalles.php";
     } 
@@ -170,6 +142,12 @@ function crudPostAlta(){
         $_SESSION['msg'] = "Correo electrónico no válido o ya registrado.";
         return; // No continúes con el alta si el correo no es válido
     }
+
+    if (!chequeoImagen($_POST,$_FILES)) {
+        $_SESSION['msg'] = "Fallo Imagen";
+        return;
+      }
+
 
     // Validar dirección IP
     if (!validarIP($cli->ip_address)) {
@@ -298,22 +276,8 @@ function generarPDF($cliente_id) {
         }
 
 
-        //Recoger la imagen del cliente si no esta entre 1 y 10 el id
-        if($cliente->id >= 1 && $cliente->id <= 10)
-        {
-            if($cliente->id < 10)
-            {
-                $imagenCli = "app/uploads/0000000" . $cliente->id . ".jpg";
-            }
-            else
-            {
-                $imagenCli = "app/uploads/000000" . $cliente->id . ".jpg";
-            }
-        }
-        else
-        {
-            $imagenCli = generarImagenAleatoria($cliente->id);
-        }
+        //Obtener la imagen
+        $imagenCli = imagenPerfil($cliente->id);
 
         //Establecer el título del documento
         $mpdf->SetTitle('Detalles del Cliente');
