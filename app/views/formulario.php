@@ -3,7 +3,11 @@
 <form   method="POST">
 <table>
  <tr><td>id:</td> 
- <td><input type="number" name="id" value="<?=$cli->id ?>"  readonly  ></td></tr>
+ <td><input type="number" name="id" value="<?=$cli->id ?>"  readonly  ></td>
+ <td rowspan="7">
+        <input type="hidden" name="MAX_FILE_SIZE" value="500000" /> 
+        <input name="imagen" type="file" accept="image/png, image/jpeg">
+ </td></tr>
  </tr>
  <tr><td>first_name:</td> 
  <td><input type="text" name="first_name" value="<?=$cli->first_name ?>" autofocus  ></td></tr>

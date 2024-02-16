@@ -2,7 +2,6 @@
 session_start();
 define ('FPAG',10); // Número de filas por página
 
-//hola
 require_once 'app/helpers/util.php';
 require_once 'app/config/configDB.php';
 require_once 'app/models/Cliente.php';
